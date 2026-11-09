@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Baby monitor</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main id="setupSection">
+    <h1>Parent device</h1>
+    <p class="muted">This device will sound an alarm when the baby unit hears crying (or loses power / Wi-Fi).</p>
+    <div class="card">
+      <label for="pin">PIN</label>
+      <input id="pin" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="PIN shown on the computer">
+      <button id="connectButton" class="btn primary">Connect</button>
+      <p id="setupError" class="error-message" role="alert"></p>
+    </div>
+    <p class="muted small">
+      Keep this page open and the screen on (it will ask to stay awake), turn the volume up, and keep the
+      device charged. Phones can pause pages that are in the background or locked.
+    </p>
+  </main>
+
+  <main id="liveSection" hidden>
+    <h1>Baby monitor <span id="connectionBadge" class="pill">connecting…</span></h1>
+
+    <div id="snoozeNotice" class="card warn" hidden>
+      <div class="row"><span>Alerts snoozed until <b id="snoozeEndText"></b></span>
+        <button id="resumeAlertsButton" class="btn" type="button">Resume</button></div>
+    </div>
+
+    <div class="card">
+      <div class="row"><span>Baby unit</span><span id="babyUnitBadge" class="pill">waiting…</span></div>
+      <div class="row"><span>Sound</span><span id="soundLevelText" class="muted"></span></div>
+      <div class="meter"><div class="fill" id="soundLevelBar"></div><div class="mark" id="soundThresholdMark"></div></div>
+      <div class="row"><span>Movement</span><span id="movementText" class="muted"></span></div>
+      <div class="meter"><div class="fill" id="movementBar"></div></div>
+      <div class="row"><span>Last alert</span><span id="lastAlertText" class="muted">none</span></div>
+    </div>
+
+    <div class="card">
+      <div class="row buttons">
+        <button id="listenButton" class="btn primary">Listen</button>
+        <button id="watchButton" class="btn primary">Watch</button>
+        <button id="stopLiveViewButton" class="btn">Stop</button>
+      </div>
+      <p id="liveViewMessage" class="muted small">Not streaming.</p>
+      <div id="videoContainer" class="video-frame" hidden>
+        <video id="liveMedia" autoplay playsinline></video>
+        <div id="movementBox" class="movement-box" hidden><span>movement</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Movement clips</h2>
+      <label class="check"><input type="checkbox" id="recordClipsCheckbox"> Save a short clip when movement is detected</label>
+      <p id="clipMessage" class="muted small">Connecting to the baby unit…</p>
+      <ul id="clipList" class="clip-list"></ul>
+      <video id="clipPlayer" controls playsinline hidden></video>
+      <button id="deleteClipsButton" class="btn danger" type="button">Delete all clips</button>
+    </div>
+
+    <div class="card">
+      <h2>Talk to the baby</h2>
+      <button id="talkButton" class="btn primary" type="button">Talk to baby</button>
+      <p id="talkMessage" class="muted small">Your voice plays on the baby unit while you talk. The microphone is only on while you talk.</p>
+    </div>
+
+    <div class="card">
+      <label for="soundSensitivity">Sound sensitivity: <b id="soundSensitivityValue"></b></label>
+      <input type="range" id="soundSensitivity" min="1" max="10" step="1">
+      <label class="check"><input type="checkbox" id="movementAlertsCheckbox"> Also alert on movement</label>
+      <button id="testAlarmButton" class="btn" type="button">Test alarm</button>
+    </div>
+  </main>
+
+  <div id="alarmOverlay" hidden>
+    <h1 id="alarmTitle"></h1>
+    <p id="alarmText"></p>
+    <button id="dismissButton" class="btn" type="button">Dismiss</button>
+    <button id="snoozeButton" class="btn alt" type="button">Snooze 10 minutes</button>
+  </div>
+
+  <script src="/static/common.js"></script>
+  <script src="/static/parent.js"></script>
+</body>
+</html>

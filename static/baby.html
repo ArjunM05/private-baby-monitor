@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Baby unit</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main id="setupSection">
+    <h1>Baby unit</h1>
+    <p class="muted">Put this device near the cot with the camera facing the baby, and keep it plugged in.</p>
+    <div class="card">
+      <label for="pin">PIN</label>
+      <input id="pin" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="PIN shown on the computer">
+      <button id="startButton" class="btn primary">Start monitoring</button>
+      <p id="setupError" class="error-message" role="alert"></p>
+    </div>
+    <p class="muted small">
+      Sound and movement are analysed on this device only. Nothing is recorded or stored, unless you switch on "Movement clips" (off by default), which keeps short clips in this page's memory only.
+      Audio/video is sent only to your parent device, directly over your home Wi-Fi, and only while
+      you tap Listen or Watch there. When a parent taps Talk, their voice plays from this device's speaker.
+    </p>
+  </main>
+
+  <main id="liveSection" hidden>
+    <h1>Baby unit <span id="connectionBadge" class="pill">connecting…</span></h1>
+    <div class="card">
+      <div class="row"><span>Parent device</span><span id="parentCountBadge" class="pill">none</span></div>
+      <div class="row"><span>Live stream</span><span id="liveViewStatus" class="muted">no</span></div>
+      <div class="row"><span>Last alert sent</span><span id="lastAlertText" class="muted">none</span></div>
+      <div class="row"><span>Parent's voice</span><span id="parentVoiceStatus" class="muted">idle</span></div>
+      <div class="row"><span>Movement clips</span><span id="savedClipsStatus" class="muted">off</span></div>
+      <audio id="parentVoiceAudio" autoplay></audio>
+      <button id="enableVoiceButton" class="btn" type="button" hidden>Tap here to allow the parent's voice to play</button>
+    </div>
+    <div class="card">
+      <div id="cameraFrame" class="video-frame">
+        <video id="cameraPreview" muted playsinline></video>
+        <div id="movementBox" class="movement-box" hidden><span>movement</span></div>
+      </div>
+      <div class="row"><span>Sound</span><span id="soundLevelText" class="muted"></span></div>
+      <div class="meter"><div class="fill" id="soundLevelBar"></div><div class="mark" id="soundThresholdMark"></div></div>
+      <div class="row"><span>Movement</span><span id="movementText" class="muted"></span></div>
+      <div class="meter"><div class="fill" id="movementBar"></div></div>
+    </div>
+    <div class="card">
+      <label for="soundSensitivity">Sound sensitivity: <b id="soundSensitivityValue"></b></label>
+      <input type="range" id="soundSensitivity" min="1" max="10" step="1">
+      <label class="check"><input type="checkbox" id="movementAlertsCheckbox"> Also alert on movement</label>
+      <label class="check"><input type="checkbox" id="recordClipsCheckbox"> Save a short clip when movement is detected</label>
+      <p class="muted small">Clips are kept in this page's memory only (never saved to a file by this app), the last 10 only, and are gone when you press Stop or close the page. Each clip runs from 10 seconds before the movement to 20 seconds after.</p>
+      <button id="deleteClipsButton" class="btn" type="button">Delete saved clips</button>
+    </div>
+    <div class="row buttons">
+      <button id="dimScreenButton" class="btn">Dim screen</button>
+      <button id="stopButton" class="btn danger">Stop</button>
+    </div>
+  </main>
+
+  <div id="dimOverlay" hidden><p>Monitoring · tap to wake</p></div>
+
+  <script src="/static/common.js"></script>
+  <script src="/static/baby.js"></script>
+</body>
+</html>
