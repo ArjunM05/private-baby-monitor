@@ -29,7 +29,7 @@ PROJECT_FOLDER = Path(__file__).resolve().parent
 STATIC_FOLDER = PROJECT_FOLDER / "static"
 CERTIFICATE_FOLDER = PROJECT_FOLDER / "certs"
 
-MAX_WRONG_PIN_ATTEMPTS = 5       # wrong PINs allowed before lockout
+MAX_WRONG_PIN_ATTEMPTS = 3       # wrong PINs allowed before lockout
 LOCKOUT_SECONDS = 300            # lockout length per client IP
 
 ROLE_BABY_UNIT = "baby"
@@ -49,7 +49,7 @@ TALK_REFUSAL_REASONS = ("another-parent-is-talking",)
 # Networking helpers
 # --------------------------------------------------------------------------
 def find_local_ip_addresses():
-    """Best-effort list of this machine's IPv4 addresses (no traffic is sent)."""
+    """List of this machine's IPv4 addresses (no traffic is sent)."""
     addresses = {"127.0.0.1"}
     try:
         probe_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
