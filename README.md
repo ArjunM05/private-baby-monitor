@@ -1,8 +1,185 @@
-# Local baby monitor
+# Home baby monitor
 
-One device (the **baby unit**) watches and listens. Another (the **parent unit**) sounds an alarm when it hears crying, and can play live audio/video on request and lets you talk to the baby. Everything runs on your home Wi-Fi. No cloud, no accounts, and nothing is recorded unless you switch on the optional movement clips (kept in memory only, see below).
+Turn two devices you already own into a baby monitor.
 
-## How it works
+- One device stays in the baby's room with its camera and microphone pointed at the cot. This guide calls it the **baby unit**.
+- Your phone, tablet or laptop is the **parent unit**. It sounds an alarm when the baby unit hears crying, and lets you watch, listen and talk to the baby.
+
+It works over your **home Wi-Fi only**. There are no accounts, no subscription and nothing goes to the internet. By default, **nothing is recorded**.
+
+---
+
+## Please read first: safety
+
+This is a hobby project. It is **not** a medical device, and it **cannot tell whether your baby is breathing**. Never use it as your only way of knowing your baby is safe.
+
+- **Test it before you trust it.** Play a recording of a baby crying near the baby unit and check the parent unit's alarm sounds. Then switch off the baby unit's Wi-Fi and check you get the "Baby unit offline" alarm.
+- **Plug in both devices**, keep the monitor page open and keep the screen on. Phones often pause pages that are in the background or locked, and then the alarm will not sound.
+- Both devices must be on the **same Wi-Fi**. If the Wi-Fi drops, the monitor tells you.
+
+---
+
+## What you need
+
+- **A computer that stays on while you use the monitor.** It runs the small program that connects your devices. Windows or Mac is easiest. It can also be the baby unit itself.
+- **A baby unit:** an old phone, a tablet, or a laptop with a webcam. An old Android phone with Chrome works best.
+- **A parent unit:** any phone, tablet or laptop with a web browser.
+- **Python**, a free program the monitor needs. The launcher below helps you install it once.
+
+A Wi-Fi camera (the kind you mount on a wall) will **not** work, because it cannot open the monitor page.
+
+---
+
+## Set up (about 10 minutes, once)
+
+### Step 1: Start the monitor on the computer
+
+1. Open the monitor folder.
+2. Double-click **`Start Baby Monitor.bat`** (Windows) or **`Start Baby Monitor.command`** (Mac).
+   - **On a Mac the first time:** right-click the file, choose **Open**, then **Open** again.
+   - **If it says Python is missing:** install it from python.org. On Windows, tick **"Add python.exe to PATH"** during the install. Then double-click the file again.
+3. The first time, it spends about a minute setting itself up. This needs the internet **once**.
+4. A browser window opens and a black window shows a **6-digit PIN**. Keep that window open for as long as you want the monitor running.
+
+Closing the black window stops the monitor. A **new PIN** is made each time you start it.
+
+### Step 2: Open the monitor on both devices
+
+On the baby unit **and** on your device, with both on the same Wi-Fi, open the link shown in the black window (or scan the QR code next to it).
+
+Your browser will probably say the connection is **"not private"** or **"not secure"**. This is expected. The monitor makes its own security certificate because an official one is not possible for a home network. Look for **Advanced** or **Show details** and choose to **continue**. You only do this once per device.
+
+### Step 3: Set up the baby unit
+
+1. Tap **This is the baby's device**.
+2. Type the PIN and tap **Start monitoring**.
+3. Allow the camera and microphone when asked.
+4. Keep the room quiet for 3 seconds while it learns the normal background sound.
+5. Put the device near the cot with the camera facing the baby, and plug it in.
+
+If you will use a fan or white-noise machine, switch it on **before** pressing Start.
+
+### Step 4: Set up your device
+
+1. Tap **This is my device**.
+2. Type the PIN and tap **Connect**.
+3. Tap **Test alarm** to check you can hear and see the alarm.
+
+You are ready. Any other parent can do Step 4 on their own phone, and all of them get the alarm.
+
+---
+
+## Using the monitor
+
+**When the baby makes a noise**, the parent unit plays a loud repeating tone, vibrates and shows a full-screen alert.
+- **Dismiss** silences the alarm (on every parent's device).
+- **Snooze 10 minutes** pauses alerts while you settle the baby.
+
+**Buttons on the parent unit**
+- **Listen:** hear the room live. This uses less battery than video.
+- **Watch:** see and hear the baby live.
+- **Stop:** end the live view.
+- **Talk to baby:** your voice plays from the baby unit. Tap again to stop.
+- **Sound sensitivity (1–10):** higher means more alerts. The little orange mark on the meter shows where an alert starts.
+
+**On the baby unit**
+- **Dim screen** turns the screen black. It also dims itself after 30 seconds. Tap to wake it.
+- **Stop** ends monitoring.
+
+### What triggers an alarm
+
+| What happened | What the alarm says |
+|---|---|
+| Steady crying-like sound, clearly louder than the room's usual noise | "Baby is making noise" |
+| Movement (only if you switch this on) | "Movement" |
+| The baby unit stopped reporting (battery, Wi-Fi, frozen page) | "Baby unit offline" |
+| The baby unit's microphone stopped working | "Baby unit problem" |
+| Your device lost its connection | "Connection lost" |
+
+The last three matter: a monitor that fails silently is worse than none.
+
+**Movement alerts are off by default**, because babies move a lot in their sleep. Tick **Also alert on movement** if you want them.
+
+### Several parents, one baby unit
+
+- Any number of parents can connect.
+- Only **one** device can be the baby unit. If a second device tries, it is refused.
+- If the baby unit reconnects after a Wi-Fi drop, it takes its place again. To swap to a different device, press **Stop** on the old one first, or wait about 30 seconds after switching it off.
+
+---
+
+## Talking to the baby
+
+Tap **Talk to baby**, allow the microphone the first time, and speak. Tap again to stop.
+
+- Only **one parent can talk at a time**. Others see "Another parent is talking" and can try again soon.
+- The microphone is on **only while you talk**, and it **switches itself off after 2 minutes**.
+- While you talk, **you will not hear the baby**. This stops the two devices squealing at each other.
+- While your voice is playing, and for 3 seconds after, the baby unit **pauses its crying alerts**. Otherwise it would hear your voice and raise a false alarm.
+- Turn the baby unit's volume to a level that suits a sleeping baby.
+
+---
+
+## Movement clips (optional, off by default)
+
+This is the one exception to "nothing is recorded". Tick **Save a short clip when movement is detected** on a parent device or on the baby unit to turn it on.
+
+When the monitor sees steady movement, it keeps a clip from **10 seconds before** the movement to **20 seconds after** it. On your device, the **Movement clips** list shows each one, for example "Movement at 12:34:05 · 40 s". Tap one to watch it with sound.
+
+**What you should know**
+- **Clips live in memory only.** The baby unit holds the last **10** and drops the oldest. Nothing is saved to a file by this app.
+- **They disappear** when you press **Stop** on the baby unit, close or reload its page, lose its power, or tap **Delete all clips**.
+- **A clip appears about 20 seconds after the movement stops,** because it includes the 20 seconds that follow.
+- **Clips only play on your device when you tap them,** and travel straight from the baby unit over your Wi-Fi. Your browser's own "download video" option could save a copy, so avoid it if you don't want one.
+- **It is a simple movement check, not an intelligent one.** A clip may show a curtain or a blanket moving. A baby lying perfectly still produces no clip.
+- **While it is on,** the baby unit keeps a few seconds of video in memory and works a little harder. An older phone may get warm, so switch it off when you do not need it.
+- If the baby unit's browser can't record video, this setting does nothing.
+
+---
+
+## Your privacy
+
+- **Everything stays on your Wi-Fi.** The monitor's pages load nothing from the internet, and live video and sound go straight from the baby unit to your device.
+- **Nothing is recorded** unless you switch on movement clips, and those stay in memory only.
+- **The server keeps no logs, history or database.** The only file it creates is a security certificate.
+- **A 6-digit PIN is needed to join.** It is **not** in the link or the QR code, so sharing the link does not share access. After five wrong guesses, a device is locked out for 5 minutes.
+
+---
+
+## If something goes wrong
+
+**The baby unit says "Could not open camera/microphone" or "The camera needs a secure connection".**
+Use the link that starts with `https://`, accept the warning (Step 2), and tap **Allow** when it asks for the camera and microphone. If you tapped Block by mistake, change it in the browser's site settings. On iPhones, camera access can be stubborn with this kind of certificate. If it won't work, use an Android phone with Chrome as the baby unit.
+
+**My other device can't open the page.**
+Check both devices are on the same Wi-Fi. A "guest" network often blocks this. Also allow Python through the computer's firewall if asked.
+
+**The live view stays on "Connecting…" (also for Talk to baby).**
+Some routers stop devices talking to each other. Look for a setting called **client isolation** or **AP isolation** in the router and turn it off. The alarms still work without it.
+
+**I changed the computer or its address and now get a warning.**
+This is normal. Accept the warning again.
+
+**I get too many alarms, or too few.**
+Change **Sound sensitivity** and watch the meter. If a fan or white-noise machine was switched on *after* you started, stop and start monitoring again.
+
+**It can't tell crying from other noise.**
+Correct. It detects *sound*, so a loud TV or someone talking in the room can set it off.
+
+**"Tap here to allow the parent's voice to play" appears on the baby unit.**
+Some phones, iPhones especially, will not play sound until the screen is tapped. Tap the button once.
+
+**No movement clips appear.**
+Make sure the clips box is ticked, and remember a clip needs steady movement and appears about 20 seconds after it stops.
+
+**"Could not open the microphone" when talking.**
+Allow microphone access for the page in your browser's settings. It needs the `https://` link.
+
+---
+
+## For the technically curious
+
+### How it works
 
 ```
  Baby unit (phone/laptop)                    Your computer                Parent unit
@@ -14,90 +191,34 @@ One device (the **baby unit**) watches and listens. Another (the **parent unit**
             └──────────  live audio/video, device to device (WebRTC)  ─────────┘
 ```
 
-- The server only relays tiny text messages (alerts, levels, connection handshakes). **Audio and video never pass through it**; they go straight between the baby unit and the parent unit, and only while the parent taps *Listen*, *Watch* or *Talk to baby*. Your voice is never recorded or stored either: the parent device's microphone is only on while you are talking.
-- Detection runs inside the baby unit's browser. **By default nothing is recorded.** The only optional exception is *Movement clips* (below), which is off until you tick it, holds clips in the baby unit's memory only, and is never written to a file by this app. There are no uploads, no logs and no database. The only files created are a self-signed certificate in `certs/`.
-- The pages load nothing from the internet (enforced by a strict Content-Security-Policy), and the live stream uses no STUN/TURN servers, so it cannot leave your network.
-- A random 6-digit PIN (new each run) is required to join. Five wrong attempts lock that device out for 5 minutes.
+- The server only relays small text messages (alerts, levels, connection handshakes). Audio and video never pass through it.
+- Detection runs inside the baby unit's browser. Movement clips are held in that page's memory and sent to a parent directly over a WebRTC data channel only when the parent asks.
+- A strict Content-Security-Policy blocks the pages from loading anything from the internet. The live stream uses no STUN/TURN servers, so it cannot leave your network.
 
-## Setup
+### Running it from a terminal
 
-Needs Python 3.9+ on any computer that stays on during use (it can also be the baby unit itself).
-
-**Easiest:** double-click `Start Baby Monitor.bat` (Windows) or `Start Baby Monitor.command` (Mac). The first run installs what it needs (internet required once) and opens the monitor in your browser. On a Mac, the first time, right-click the file and choose Open. If you prefer a terminal:
+Needs Python 3.9 or newer.
 
 ```bash
 pip install -r requirements.txt
 python server.py
 ```
 
-It prints a link, a QR code and a PIN. The PIN is deliberately **not** part of the link or the QR code, so you type it on each device and sharing the link never shares access. On **both** devices, connected to the same Wi-Fi:
+Options: `--port 8443`, `--pin 123456` (a fixed PIN instead of a new one each run), `--host 127.0.0.1` (this computer only), `--open-browser`.
 
-1. Open the link (or scan the QR code). Each device shows a certificate warning the first time, because the certificate is self-signed. Accept it (Advanced → Proceed). HTTPS is required for browsers to allow camera and microphone access.
-2. On the baby's device choose **This is the baby's device**, type the PIN, tap **Start monitoring**, allow camera and microphone, and leave the room quiet for the 3-second calibration.
-3. On yours choose **This is my device**, type the PIN, tap **Connect**, then **Test alarm** to confirm you can hear it and see it.
+### How detection works, and its limits
 
-Options: `--port 8443`, `--pin 123456` (fixed PIN, so you do not have to read a new one each run), `--host 127.0.0.1` (this computer only).
+This is classic signal processing, not a trained AI model.
 
-## Using it
+- **Sound:** it measures loudness over the last few seconds and the share of energy in the 250–4000 Hz band, where crying and voices live. It alerts when the sound is clearly above the room's own background level, mostly in that band, and lasts about 1.2 seconds or more. Brief bumps and low rumbles are ignored.
+- **Movement:** each video frame is shrunk to a tiny greyscale copy and compared with the one before. The orange "movement" box outlines the area that changed, glides smoothly, and lingers about 1.5 seconds after the movement stops. It cannot tell a baby from a hand, a blanket or a pet, and it cannot see a baby who is lying perfectly still. Poor lighting adds picture noise, which can make the box flicker or fill too much of the picture.
 
-- **Alarm:** a loud repeating tone, vibration and a full-screen alert. *Dismiss* silences it; *Snooze 10 minutes* pauses sound/movement alerts while you are soothing the baby.
-- **Several parents, one baby unit:** any number of parent devices can connect. All of them get the alerts, and dismissing the alarm on one silences it on the others. Only one device can be the baby unit: a second device that tries to start as one is refused. The baby device remembers its identity, so it can reconnect after a Wi-Fi drop or a reload. If you want to switch to a different device, stop the old one first, or wait about 30 seconds after switching it off.
-- **Listen / Watch:** audio only is lighter on battery; Watch adds video.
-- **Movement clips (optional, off by default):** tick *Save a short clip when movement is detected* on a parent device or on the baby unit. When the same sustained movement that triggers the movement alert is seen, the baby unit keeps a clip that runs from **10 seconds before the movement to 20 seconds after the last movement** (a very long movement is cut at 60 seconds after it started). The parent's *Movement clips* list shows each one as "Movement at 12:34:05 · 40 s"; tap it to watch it with sound. Good to know:
-  - **Memory only.** Clips are held in the baby unit page's memory (the last **10**, oldest dropped first, and never more than 40 MB). This app never writes them to a file. They are gone when you press *Stop* on the baby unit, close or reload its page, or tap *Delete all clips* (on a parent or on the baby unit). A parent fetches a clip straight from the baby unit over your Wi-Fi (never through the server) only when you tap it, and plays it from memory; it is not saved on the parent either (a browser's own "download video" menu item could save it, so don't use that if you don't want a copy).
-  - **How the 10 seconds "before" works.** While clips are switched on, the baby unit keeps recording in short overlapping pieces and throws each piece away after 20 seconds unless movement was detected. So while it is switched on there is always a few seconds of video sitting in memory, and the baby unit does a little more work (it encodes video continuously), which can make an older phone warm. Switch it off when you do not need it.
-  - **It shows what the camera saw, not what happened.** It uses the same simple movement detection as the alert (no AI), so a clip can show a curtain or a blanket moving, and a baby lying still produces no clip. The baby unit must stay open for clips to exist. Unplugging it or closing its page loses them.
-  - If the baby unit's browser cannot record video (some older browsers), the setting simply does nothing.
-- **Talk to baby:** tap it once to start talking (your voice plays from the baby unit's speaker) and tap again to stop. The first time, allow the microphone. It switches itself off after 2 minutes so the microphone is never left on by accident. Turn the baby unit's volume to a level that suits a sleeping baby. Rules that keep it simple and safe:
-  - Only **one parent can talk at a time**; a second parent is told "Another parent is talking" and can try again once the first stops.
-  - While you talk, the baby unit's microphone is **not** sent back to you (you would hear yourself and the two devices could squeal), so you will not hear the baby until you stop. Other parents who are listening still hear everything.
-  - While a parent's voice is playing, and for 3 seconds after, the baby unit **pauses its sound alerts** (its microphone would otherwise hear your own voice from the speaker and raise a false alarm). Movement alerts and the "offline" alarms keep working.
-- **Sensitivity (1-10)** can be changed from either device. **Also alert on movement** is off by default because babies move a lot in their sleep.
-- **Dim screen** on the baby unit shows a black screen (it also dims itself after 30 s). Tap to wake.
-
-### What it alerts on
-
-| Situation | Parent unit alarm |
-|---|---|
-| Sustained sound in the voice/cry range, clearly above the room's usual level | "Baby is making noise" |
-| Movement (if enabled) | "Movement" |
-| Baby unit stops reporting (battery, Wi-Fi, page frozen) | "Baby unit offline" |
-| Baby unit's microphone stops working | "Baby unit problem" |
-| Parent unit loses its connection to the server | "Connection lost" |
-
-The last three matter: a monitor that fails silently is worse than none.
-
-### How detection works (and its limits)
-
-This is classic signal processing, not a trained AI model. It measures loudness over the last few seconds and the share of energy in the 250-4000 Hz band where crying and voices live. It alerts when the sound is clearly above the **room's own background level** (measured at start-up and tracked as it changes), mostly in that band, and lasts about 1.2 s or more. Brief bumps and low rumbles are ignored. The meters show the current level and the alert threshold, so you can tune sensitivity by watching them.
-
-- It cannot tell crying from a loud TV or a person talking in the room. It detects *sound*.
-- **The orange "movement" box** (on the baby unit's preview and on the parent's live video) outlines the area of the picture that changed since the previous frame (tiny specks are ignored). It uses no AI model: each frame is shrunk to a tiny greyscale copy and compared with the one before. The box glides, and lingers for about 1.5 s after the movement stops. It **cannot tell a baby from a hand, a blanket or a pet, and it cannot see a baby who is lying perfectly still**. Poor lighting adds picture noise, which can make it flicker or fill too much of the picture.
-- If a white-noise machine or fan will be on, switch it on **before** pressing Start, so it becomes part of the background. Turning one on afterwards will trigger repeated alerts until you restart monitoring.
-
-## Please read: safety
-
-This is a hobby project, not a medical device or a certified safety product, and it does not detect breathing. Do not rely on it as your only way of knowing your baby is safe. Before trusting it on a real night, test it: let the baby unit hear a recording of crying from across the room, confirm the alarm sounds, then unplug the baby unit's Wi-Fi and confirm the "offline" alarm.
-
-Both devices should be **plugged in**, with the **page open and the screen on**. Phone browsers may pause pages that are in the background or locked, which would stop alerts. The pages request a screen wake lock to help, but it cannot be guaranteed on every phone. It also only works while both devices are on the same Wi-Fi network.
-
-## Troubleshooting
-
-- **"Can't open camera"**: you must use the `https://` link and accept the certificate warning. On iPhone, camera access over a self-signed certificate can be stubborn; if it won't work, use Chrome/Android for the baby unit or install [mkcert](https://github.com/FiloSottile/mkcert) and point `certs/cert.pem` and `certs/key.pem` at a certificate it generates (include your computer's IP).
-- **Other device can't reach the page**: check both are on the same Wi-Fi (not a "guest" network with client isolation) and allow Python through the computer's firewall for the chosen port.
-- **Certificate error after your computer's IP changed**: the certificate is regenerated automatically on next start; accept the warning again.
-- **Live view stays on "Connecting…"**: some routers block device-to-device traffic (client/AP isolation). Disable it, or use the alerts only.
-- **"Tap here to allow the parent's voice to play" appears on the baby unit**: some phones (iPhones especially) refuse to play sound until the screen is tapped. Tap that button once; after that the parent's voice plays normally.
-- **No movement clips appear**: tick *Save a short clip when movement is detected*, and note that a clip is only kept for sustained movement (about 2.5 seconds of it within 4 seconds, the same as the movement alert). The first clip appears about 20 seconds after the movement stops, because it records the 20 seconds after.
-- **Talk to baby says it could not open the microphone**: allow microphone access for the page in the browser's site settings (it needs the `https://` link) and try again.
-- **Talk to baby stays on "Connecting…"**: it uses the same device-to-device connection as Listen/Watch, so the router isolation fix above applies.
-- **Too many / too few alerts**: adjust sensitivity and watch the meters; the orange mark is the alert threshold.
-
-## Files
+### Files
 
 ```
+Start Baby Monitor.bat / .command   double-click launchers
 server.py            HTTPS + relay (no storage); creates certs/ on first run
-static/baby.*        baby unit page: capture, analysis, WebRTC sender, plays the parent's voice
-static/parent.*      parent unit page: alarm, meters, WebRTC receiver, talk-to-baby microphone, movement clip list and player
-static/common.js     shared WebSocket link and wake lock
+static/baby.*        baby unit page: capture, analysis, video sender, plays the parent's voice, clip recorder
+static/parent.*      parent unit page: alarm, meters, video receiver, talk-to-baby microphone, clip list and player
+static/common.js     shared server link and screen wake lock
 ```
